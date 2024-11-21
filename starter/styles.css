@@ -1,0 +1,254 @@
+/*
+ * Custom CSS
+ */
+
+ :root {
+  --bs-body-bg: var(--bs-gray-100);
+}
+
+.custom-bg {
+  background-color: #00B2C0;
+  color: white; /* Optional: to ensure text color is readable */
+}
+
+/* General modal styling */
+.modal-dialog {
+  max-width: 80%; /* Default width for desktop */
+  margin: auto;
+}
+
+.modal-content {
+  padding: 20px; /* Inner padding */
+  border-radius: 10px; /* Smooth edges */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: row; /* Default layout side-by-side */
+  gap: 20px;
+  align-items: flex-start; /* Align to the top */
+}
+
+/* Image Slider Styling */
+.modal-image-slider {
+  flex: 1; /* Take 50% of modal width */
+  max-width: 50%; /* Limit image slider width */
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #ddd; /* Add subtle border */
+  border-radius: 8px; /* Rounded edges */
+}
+
+.image-slider {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.slider-image {
+  display: none; /* Hide inactive images */
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.slider-image.active {
+  display: block;
+  opacity: 1;
+}
+
+/* Arrow Navigation */
+button.prev-arrow,
+button.next-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  transition: background-color 0.3s ease;
+}
+
+button.prev-arrow:hover,
+button.next-arrow:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+button.prev-arrow {
+  left: 10px;
+}
+
+button.next-arrow {
+  right: 10px;
+}
+
+button.prev-arrow:disabled,
+button.next-arrow:disabled {
+  display: none;
+}
+
+/* Product Details */
+.product-details {
+  flex: 1; /* Take remaining space */
+  padding: 10px;
+}
+
+.product-details h5 {
+  margin-top: 0;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.product-details h6 {
+  margin: 10px 0;
+  font-weight: bold;
+  color: #555;
+}
+
+.product-details p {
+  margin: 5px 0 15px;
+  line-height: 1.5;
+  color: #666;
+}
+
+/* Card Styling */
+.card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px; /* Vertical spacing */
+  padding: 15px; /* Inner padding */
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+  padding: 15px;
+  padding-bottom: 0; /* Remove extra padding at the bottom */
+}
+
+.card-title {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.card-text {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #666;
+}
+
+/* Add spacing between card columns */
+#card-container {
+  display: flex; /* Flexbox for alignment */
+  flex-wrap: wrap; /* Allow wrapping to the next row */
+  gap: 20px; /* Add gap between columns and rows */
+}
+
+/* Card width for different screen sizes */
+#card-container .card {
+  flex: 1 1 calc(33.333% - 20px); /* Adjust width for 3 cards per row with a gap */
+  max-width: calc(33.333% - 20px);
+}
+
+@media (max-width: 992px) { /* Tablet view */
+  #card-container .card {
+    flex: 1 1 calc(50% - 20px); /* Adjust for 2 cards per row with a gap */
+    max-width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 576px) { /* Mobile view */
+  #card-container .card {
+    flex: 1 1 100%; /* Full width for single column */
+    max-width: 100%;
+  }
+}
+
+/* Button Container and Buttons */
+.button-container {
+  display: flex; /* Align buttons side by side */
+  justify-content: flex-start; /* Align buttons to the left */
+  gap: 10px; /* Add consistent spacing between buttons */
+  margin: 0; /* Reset any extra margins */
+  padding: 0; /* Reset any extra padding */
+}
+
+a.btn {
+  display: inline-block; /* Buttons behave like inline-block elements */
+  text-decoration: none; /* No underline */
+  margin: 0; /* Reset margins */
+  padding: 10px 15px; /* Uniform padding */
+  font-size: 1rem; /* Standard font size */
+  border-radius: 5px; /* Rounded corners */
+  line-height: normal; /* Ensures proper alignment */
+  vertical-align: middle;
+}
+
+a.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+}
+
+a.btn-primary:hover {
+  background-color: #0056b3;
+  color: #fff;
+}
+
+a.btn-secondary {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+a.btn-secondary:hover {
+  background-color: #5a6268;
+  color: #fff;
+}
+
+/* Responsive Styles */
+@media (max-width: 576px) {
+  .button-container {
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 15px; /* Add space between buttons */
+  }
+
+  .button-container .btn {
+    width: 100%; /* Buttons take full width */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) { /* Tablet view */
+  .button-container {
+    justify-content: space-between; /* Spread buttons evenly */
+  }
+}
+
+@media (min-width: 992px) { /* Desktop view */
+  .button-container {
+    justify-content: flex-start; /* Align buttons to the left */
+    gap: 15px; /* Add more spacing for desktop */
+  }
+
+  a.btn {
+    margin: 0 !important; /* Force reset margin */
+    padding: 12px 18px; /* Slightly larger padding for desktop */
+  }
+}
