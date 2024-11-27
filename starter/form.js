@@ -1,54 +1,81 @@
 // Parse Query Parameters
 const urlParams = new URLSearchParams(window.location.search);
 
-// Populate Form Fields
-document.getElementById("productTitle").value = urlParams.get("title") || "N/A";
-document.getElementById("productBrand").value = urlParams.get("brand") || "N/A";
-document.getElementById("productDescription").value = urlParams.get("description") || "N/A";
-
-// Parse colors and their corresponding images from the Images field
-const colorImages = {};
+// Extract product data from URL parameters
+const productTitle = urlParams.get("title") || "N/A";
+const productBrand = urlParams.get("brand") || "N/A";
+const productDescription = urlParams.get("description") || "N/A";
 const colors = urlParams.get("colors")?.split(",").map(color => color.trim()) || [];
-const images = urlParams.get("images") || ""; // Example: "Black:image1.jpg,Brown:image2.jpg"
+const sizes = urlParams.get("sizes")?.split(",").map(size => size.trim()) || [];
+const images = urlParams.get("images")?.split(",").map(image => image.trim()) || [];
 
-// Map colors to their images
-if (images) {
-  images.split(",").forEach(pair => {
-    const [color, imageURL] = pair.split(":").map(value => value.trim());
-    if (color && imageURL) {
-      colorImages[color] = imageURL; // Add to the colorImages mapping
-    }
+// Debugging: Log images
+console.log("Images:", images);
+
+// Conditionally render the sizes and colors sections
+const colorsField = colors.length > 0 ? `<p><strong>Colors:</strong> ${colors.join(", ")}</p>` : "";
+const sizesField = sizes.length > 0 ? `<p><strong>Sizes:</strong> ${sizes.join(", ")}</p>` : "";
+
+// Populate the product page
+document.body.innerHTML = `
+  <div class="product-page-container">
+    <!-- Left Section: Image Slideshow and Product Details -->
+    <div class="product-left">
+      <div class="product-images">
+        <div id="imageSlideshow" class="slideshow">
+          ${images
+            .map(
+              (image, index) => `
+                <img class="slide ${index === 0 ? "active" : ""}" src="${image}" alt="Image ${index + 1}" onerror="this.src='fallback-image.png';" />
+              `
+            )
+            .join("")}
+          <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+          <button class="next" onclick="changeSlide(1)">&#10095;</button>
+        </div>
+      </div>
+      <div class="product-text-details">
+        <p><strong>Product Name:</strong> ${productTitle}</p>
+        <p><strong>Brand:</strong> ${productBrand}</p>
+        <p><strong>Description:</strong> ${productDescription}</p>
+        ${colorsField}
+        ${sizesField}
+      </div>
+    </div>
+
+    <!-- Right Section: Embedded Form -->
+    <div class="product-form">
+      <div class="form-embed-container">
+        <script type="text/javascript" defer
+          src="https://form.123formbuilder.com/embed/6773482.js"
+          data-role="form"
+          data-default-width="800px"
+          data-custom-vars="115911333=${encodeURIComponent(productTitle)}&115911392=${encodeURIComponent(colors.join(", "))}">
+        </script>
+      </div>
+    </div>
+  </div>
+`;
+
+// Slideshow Functionality
+let currentSlideIndex = 0;
+
+function showSlide(index) {
+  const slides = document.querySelectorAll(".slide");
+  if (!slides.length) return;
+
+  slides.forEach((slide, idx) => {
+    slide.style.display = idx === index ? "block" : "none";
   });
 }
 
-// Populate Colors Dropdown
-const colorsDropdown = document.getElementById("productColors");
-colors.forEach(color => {
-  const option = document.createElement("option");
-  option.value = color;
-  option.textContent = color;
-  colorsDropdown.appendChild(option);
-});
+function changeSlide(step) {
+  const slides = document.querySelectorAll(".slide");
+  if (!slides.length) return;
 
-// Populate Sizes Dropdown
-const sizesDropdown = document.getElementById("productSizes");
-const sizes = urlParams.get("sizes")?.split(",").map(size => size.trim()) || [];
-sizes.forEach(size => {
-  const option = document.createElement("option");
-  option.value = size;
-  option.textContent = size;
-  sizesDropdown.appendChild(option);
-});
-
-// Image Preview Logic
-const productImage = document.getElementById("productImage");
-// Set default image for the first color
-if (colors.length > 0) {
-  productImage.src = colorImages[colors[0]] || "fallback-image.png";
+  currentSlideIndex = (currentSlideIndex + step + slides.length) % slides.length;
+  showSlide(currentSlideIndex);
 }
 
-// Update image on color selection
-colorsDropdown.addEventListener("change", () => {
-  const selectedColor = colorsDropdown.value;
-  productImage.src = colorImages[selectedColor] || "fallback-image.png"; // Update image based on selected color
-});
+// Initialize the slideshow
+showSlide(currentSlideIndex);

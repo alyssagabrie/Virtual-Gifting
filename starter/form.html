@@ -3,74 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Product Form</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    .form-container {
-      display: flex; /* Use flexbox for layout */
-      flex-direction: row; /* Arrange items side by side */
-      gap: 20px; /* Add spacing between the image and the form */
-    }
-
-    .form-container .image-preview {
-      flex: 1; /* Let the image take 1/3rd of the space */
-    }
-
-    .form-container .form-section {
-      flex: 2; /* Let the form take 2/3rds of the space */
-    }
-
-    .image-preview img {
-      max-width: 100%; /* Ensure the image doesn't overflow */
-      border: 1px solid #ddd;
-      border-radius: 8px;
-    }
-
-    @media (max-width: 768px) {
-      .form-container {
-        flex-direction: column; /* Stack items vertically on smaller screens */
-      }
-    }
-  </style>
+  <meta name="description" content="Product details page for gift selection">
+  <title>Product Details</title>
+  <!-- Link to your external CSS -->
+  <link rel="stylesheet" href="form.css">
 </head>
 <body>
-  <div class="container mt-5">
-    <h1>Fill Out the Form for Your Selected Product</h1>
-    <div class="form-container">
-      <!-- Image Preview -->
-      <div class="image-preview">
-        <img id="productImage" src="" alt="Product Preview" class="img-fluid">
-      </div>
 
-      <!-- Form Section -->
-      <div class="form-section">
-        <form>
-          <div class="mb-3">
-            <label for="productTitle" class="form-label">Product Title</label>
-            <input type="text" id="productTitle" class="form-control" readonly>
-          </div>
-          <div class="mb-3">
-            <label for="productBrand" class="form-label">Brand</label>
-            <input type="text" id="productBrand" class="form-control" readonly>
-          </div>
-          <div class="mb-3">
-            <label for="productDescription" class="form-label">Description</label>
-            <textarea id="productDescription" class="form-control" rows="3" readonly></textarea>
-          </div>
-          <div class="mb-3">
-            <label for="productColors" class="form-label">Select a Color</label>
-            <select id="productColors" class="form-select"></select>
-          </div>
-          <div class="mb-3">
-            <label for="productSizes" class="form-label">Select a Size</label>
-            <select id="productSizes" class="form-select"></select>
-          </div>
-          <button type="submit" class="btn btn-success">Submit</button>
-        </form>
+
+
+  <div class="product-page-container">
+    <!-- Left Section -->
+    <div class="product-left">
+      <div class="product-images">
+        <img id="productImage" src="image1.jpg" alt="Product Name" />
+      </div>
+      <div class="product-text-details">
+        <p><strong>Product Name:</strong> Example Product</p>
+        <p><strong>Brand:</strong> Example Brand</p>
+        <p><strong>Description:</strong> This is an example product description.</p>
+        <p><strong>Colors:</strong> 
+          <span class="color-option" data-color="Red">Red</span>, 
+          <span class="color-option" data-color="Blue">Blue</span>
+        </p>
+        <p><strong>Sizes:</strong> Small, Medium, Large</p>
+      </div>
+    </div>
+    
+    <!-- Right Section -->
+    <div class="product-form">
+      <div class="form-embed-container">
+        <script type="text/javascript" defer 
+                src="https://form.123formbuilder.com/embed/6773482.js" 
+                data-role="form" 
+                data-default-width="800px" 
+                data-custom-vars="115911333=Mens VL Court 3.0 Shoes&115911392=Cloud White / Better Scarlet / Team Navy Blue 2">
+        </script>
       </div>
     </div>
   </div>
+  <!-- Go Back Section -->
+
+  <!-- Include your JavaScript -->
   <script src="form.js"></script>
 </body>
 </html>
-

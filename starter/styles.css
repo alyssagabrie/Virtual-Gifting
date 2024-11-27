@@ -8,49 +8,73 @@
 
 .custom-bg {
   background-color: #00B2C0;
-  color: white; /* Optional: to ensure text color is readable */
+  color: white; /* Optional: ensure text is readable */
 }
 
 /* General modal styling */
 .modal-dialog {
-  max-width: 80%; /* Default width for desktop */
+  max-width: 80%;
   margin: auto;
 }
 
 .modal-content {
-  padding: 20px; /* Inner padding */
+  padding: 20px;
   border-radius: 10px; /* Smooth edges */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
 }
 
-.modal-body {
-  display: flex;
-  flex-direction: row; /* Default layout side-by-side */
-  gap: 20px;
-  align-items: flex-start; /* Align to the top */
+/* Custom modal styling */
+.custom-modal {
+  max-width: 70%; /* Adjust the width */
+}
+
+.custom-modal .modal-content {
+  border-radius: 8px; /* Optional: Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.custom-modal .modal-header {
+  border-bottom: 1px solid #ddd; /* Optional: Add a bottom border */
+  padding-bottom: 10px;
+}
+
+.custom-modal .modal-body {
+  font-size: 14px; /* Adjust font size */
+  line-height: 1.6; /* Improve readability */
+  padding: 15px 10px; /* Add padding */
+}
+
+@media (max-width: 768px) {
+  .custom-modal {
+    max-width: 90%; /* Use most of the screen width for smaller devices */
+  }
+}
+
+@media (max-width: 576px) {
+  .custom-modal {
+    max-width: 100%; /* Full width for very small screens */
+  }
 }
 
 /* Image Slider Styling */
 .modal-image-slider {
-  flex: 1; /* Take 50% of modal width */
-  max-width: 50%; /* Limit image slider width */
+  flex: 1;
+  max-width: 50%;
   position: relative;
   overflow: hidden;
-  border: 1px solid #ddd; /* Add subtle border */
-  border-radius: 8px; /* Rounded edges */
+  border: 1px solid #ddd;
+  border-radius: 8px;
 }
 
 .image-slider {
   position: relative;
   width: 100%;
-  height: auto;
   overflow: hidden;
 }
 
 .slider-image {
   display: none; /* Hide inactive images */
   width: 100%;
-  height: auto;
   object-fit: cover;
 }
 
@@ -129,8 +153,8 @@ button.next-arrow:disabled {
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px; /* Vertical spacing */
-  padding: 15px; /* Inner padding */
+  margin-bottom: 20px;
+  padding: 15px;
 }
 
 .card:hover {
@@ -140,7 +164,6 @@ button.next-arrow:disabled {
 
 .card-body {
   padding: 15px;
-  padding-bottom: 0; /* Remove extra padding at the bottom */
 }
 
 .card-title {
@@ -149,68 +172,56 @@ button.next-arrow:disabled {
   color: #333;
 }
 
-.card-text {
-  font-size: 1rem;
-  margin-bottom: 10px;
-  color: #666;
-}
-
-/* Add spacing between card columns */
+/* Card Container */
 #card-container {
-  display: flex; /* Flexbox for alignment */
-  flex-wrap: wrap; /* Allow wrapping to the next row */
-  gap: 20px; /* Add gap between columns and rows */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
-/* Card width for different screen sizes */
 #card-container .card {
-  flex: 1 1 calc(33.333% - 20px); /* Adjust width for 3 cards per row with a gap */
+  flex: 1 1 calc(33.333% - 20px);
   max-width: calc(33.333% - 20px);
 }
 
-@media (max-width: 992px) { /* Tablet view */
+@media (max-width: 992px) {
   #card-container .card {
-    flex: 1 1 calc(50% - 20px); /* Adjust for 2 cards per row with a gap */
+    flex: 1 1 calc(50% - 20px);
     max-width: calc(50% - 20px);
   }
 }
 
-@media (max-width: 576px) { /* Mobile view */
+@media (max-width: 576px) {
   #card-container .card {
-    flex: 1 1 100%; /* Full width for single column */
+    flex: 1 1 100%;
     max-width: 100%;
   }
 }
 
 /* Button Container and Buttons */
 .button-container {
-  display: flex; /* Align buttons side by side */
-  justify-content: flex-start; /* Align buttons to the left */
-  gap: 10px; /* Add consistent spacing between buttons */
-  margin: 0; /* Reset any extra margins */
-  padding: 0; /* Reset any extra padding */
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
 }
 
 a.btn {
-  display: inline-block; /* Buttons behave like inline-block elements */
-  text-decoration: none; /* No underline */
-  margin: 0; /* Reset margins */
-  padding: 10px 15px; /* Uniform padding */
-  font-size: 1rem; /* Standard font size */
-  border-radius: 5px; /* Rounded corners */
-  line-height: normal; /* Ensures proper alignment */
-  vertical-align: middle;
+  text-decoration: none;
+  margin: 0;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border-radius: 5px;
 }
 
 a.btn-primary {
   background-color: #007bff;
   color: #fff;
-  border: none;
 }
 
 a.btn-primary:hover {
   background-color: #0056b3;
-  color: #fff;
 }
 
 a.btn-secondary {
@@ -220,35 +231,21 @@ a.btn-secondary {
 
 a.btn-secondary:hover {
   background-color: #5a6268;
-  color: #fff;
 }
 
-/* Responsive Styles */
 @media (max-width: 576px) {
   .button-container {
-    flex-direction: column; /* Stack buttons vertically */
-    gap: 15px; /* Add space between buttons */
+    flex-direction: column;
+    gap: 15px;
   }
 
   .button-container .btn {
-    width: 100%; /* Buttons take full width */
+    width: 100%;
   }
 }
 
-@media (min-width: 768px) and (max-width: 991px) { /* Tablet view */
+@media (min-width: 768px) and (max-width: 991px) {
   .button-container {
-    justify-content: space-between; /* Spread buttons evenly */
-  }
-}
-
-@media (min-width: 992px) { /* Desktop view */
-  .button-container {
-    justify-content: flex-start; /* Align buttons to the left */
-    gap: 15px; /* Add more spacing for desktop */
-  }
-
-  a.btn {
-    margin: 0 !important; /* Force reset margin */
-    padding: 12px 18px; /* Slightly larger padding for desktop */
+    justify-content: space-between;
   }
 }

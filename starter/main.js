@@ -79,10 +79,18 @@ function createDynamicCards(data) {
     const cardBody = document.createElement("div");
     cardBody.className = "card-body";
 
-    const cardTitle = document.createElement("h5");
-    cardTitle.className = "card-title";
-    cardTitle.textContent = item.Title || "No Title Available";
-    cardBody.appendChild(cardTitle);
+// Add Brand element
+const cardBrand = document.createElement("small");
+cardBrand.className = "card-brand text-muted d-block"; // Styling classes
+cardBrand.textContent = item.Brand || "No Brand Available";
+cardBody.appendChild(cardBrand);
+
+// Title remains below Brand
+const cardTitle = document.createElement("h5");
+cardTitle.className = "card-title";
+cardTitle.textContent = item.Title || "No Title Available";
+cardBody.appendChild(cardTitle);
+
 
     const buttonContainer = document.createElement("div");
     buttonContainer.className = "button-container";
@@ -92,7 +100,8 @@ function createDynamicCards(data) {
         const selectButton = document.createElement("a");
         selectButton.className = "btn btn-primary";
         selectButton.textContent = "Select this Gift";
-        selectButton.href = `form.html?title=${encodeURIComponent(item.Title)}&brand=${encodeURIComponent(item.Brand)}&description=${encodeURIComponent(item.Description)}&colors=${encodeURIComponent(item.Colors)}&sizes=${encodeURIComponent(item.Sizes)}`;
+        selectButton.href = `form.html?title=${encodeURIComponent(item.Title)}&brand=${encodeURIComponent(item.Brand)}&description=${encodeURIComponent(item.Description)}&colors=${encodeURIComponent(item.Colors)}&sizes=${encodeURIComponent(item.Sizes)}&images=${encodeURIComponent(item.Images)}`;
+
         buttonContainer.appendChild(selectButton);
 
     const quickViewButton = document.createElement("button");
@@ -129,7 +138,8 @@ function createQuickViewModal(item, index) {
   modal.setAttribute("aria-hidden", "true");
 
   const modalDialog = document.createElement("div");
-  modalDialog.className = "modal-dialog modal-lg custom-modal";
+  modalDialog.className = "modal-dialog custom-modal"; // Add custom class
+  
 
   const modalContent = document.createElement("div");
   modalContent.className = "modal-content";
@@ -159,15 +169,19 @@ function createQuickViewModal(item, index) {
   // Modal Image Slider
   const modalImageSlider = document.createElement("div");
   modalImageSlider.className = "modal-image-slider w-100 w-md-50 position-relative";
-
+  
   const images = item.Images?.split(",").map(url => url.trim()) || [];
   images.forEach((imageURL, imgIndex) => {
     const img = document.createElement("img");
     img.src = imageURL;
     img.alt = `${item.Title} - Image ${imgIndex + 1}`;
     img.className = `slider-image ${imgIndex === 0 ? "active" : ""}`;
+    img.style.width = "100%"; // Fill the width of the container
+    img.style.height = "100%"; // Fill the height of the container
+    img.style.objectFit = "cover"; // Maintain aspect ratio
     modalImageSlider.appendChild(img);
   });
+  
 
   // Add navigation buttons to the modal slider
   const prevArrow = document.createElement("button");
@@ -187,8 +201,9 @@ function createQuickViewModal(item, index) {
   productDetails.className = "product-details ms-md-3 mt-3 mt-md-0";
 
   const brand = document.createElement("h5");
-  brand.innerHTML = `Brand: <span>${item.brand}</span>`;
+  brand.innerHTML = `Brand: <span>${item.Brand || "No Brand Available"}</span>`;
   productDetails.appendChild(brand);
+
 
   const description = document.createElement("h6");
   description.textContent = "Description:";
@@ -206,13 +221,19 @@ function createQuickViewModal(item, index) {
   colorsText.textContent = item.Colors;
   productDetails.appendChild(colorsText);
 
-  const sizes = document.createElement("h6");
-  sizes.textContent = "Available Sizes:";
-  productDetails.appendChild(sizes);
+ // Add "Confirm this gift" button right after description and colors
+ const confirmButton = document.createElement("a");
+ confirmButton.className = "btn btn-primary mt-3"; // Add button styles
+ confirmButton.textContent = "Confirm this gift";
+ confirmButton.href = `form.html?title=${encodeURIComponent(item.Title)}&brand=${encodeURIComponent(item.Brand)}`;
+ productDetails.appendChild(confirmButton); // Append to productDetails
+  // const sizes = document.createElement("h6");
+  // sizes.textContent = "Available Sizes:";
+  // productDetails.appendChild(sizes);
 
-  const sizesText = document.createElement("p");
-  sizesText.textContent = item.Sizes;
-  productDetails.appendChild(sizesText);
+  // const sizesText = document.createElement("p");
+  // sizesText.textContent = item.Sizes;
+  // productDetails.appendChild(sizesText);
 
   // Combine modal elements
   modalBody.appendChild(modalImageSlider);
