@@ -74,53 +74,85 @@
       </div>
     </nav>
 
-    <div class="container col-xxl-8 px-4 py-5">
-      <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-        <div class="col-10 col-sm-8 col-lg-6">
-          <img
-            src="bootstrap-themes.png"
-            class="d-block mx-lg-auto img-fluid"
-            alt="Bootstrap Themes"
-            width="700"
-            height="500"
-            loading="lazy"
-          />
-        </div>
-        <div class="col-lg-6">
-          <h1 class="display-5 fw-bold lh-1 mb-3">
-            Gifting Website Template
-          </h1>
-          <p class="lead">
-            Quickly design and customize responsive mobile-first sites with
-            Bootstrap, the world’s most popular front-end open source toolkit,
-            featuring Sass variables and mixins, responsive grid system,
-            extensive prebuilt components, and powerful JavaScript plugins.
-          </p>
-          <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-            <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">
-              Primary
-            </button>
-            <button type="button" class="btn btn-outline-secondary btn-lg px-4">
-              Default
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="custom-bg p-4">
-      <div class="container text-center">
-        <h2>Your Content Here</h2>
-        <p>This container has a custom background color.</p>
-      </div>
-    </div>
+    <style>
+   .hero-section {
+      background-image: url('Images/giftbackground.png');
+      background-size: cover; /* Makes the image cover the entire section */
+      background-position: center; /* Centers the image */
+      background-repeat: no-repeat; /* Ensures no tiling */
+      height: 100vh; /* Sets the height of the hero section */
+      display: flex; /* Enables flexbox for centering content */
+      justify-content: center; /* Centers content horizontally */
+      align-items: center; /* Centers content vertically */
+      color: white; /* Ensures text is visible on the image */
+      text-align: center; /* Centers the text */
+    }
 
-    
-  
+      .hero-text h1 {
+          font-size: 3rem;
+          font-weight: bold;
+          color:#721c24
+      }
+      .hero-text p {
+          font-size: 1.25rem;
+          margin: 15px 0;
+          color: rgb(231, 134, 15);
+      }
+      .start-shopping-btn {
+          margin-top: 20px;
+          padding: 15px 30px;
+          font-size: 1.25rem;
+          background-color: #f8d7da;
+          color: #721c24;
+          border: none;
+          border-radius: 5px;
+          text-transform: uppercase;
+          transition: transform 0.3s, background-color 0.3s;
+      }
+      .start-shopping-btn:hover {
+          background-color: #721c24;
+          color: #ffffff;
+          transform: scale(1.1);
+      }
+
+      .banner {
+      background-color: #721c24; /* Light gray background */
+      padding: 20px; /* Internal spacing */
+      text-align: center; /* Centers content */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds subtle shadow */
+      width: 100%; /* Makes the banner stretch the entire width */
+      margin: 0; /* Removes default margin */
+      position: relative; /* Ensures it stays within the flow of the document */
+    }
+
+    .h2{
+      color:#ffff;
+    }
+
+
+
+  </style>
+</head>
+<body>
+  <div>
+  <div class="hero-section">
+      <div class="hero-text">
+          <h1>Welcome to Our Gifting Hub</h1>
+          <p>Discover the perfect gifts for your team, tailored to celebrate their unique style.</p>
+          <button class="start-shopping-btn" onclick="window.location.href='#shop';">Start Shopping</button>
+      </div>
+  </div> 
+
+  <div class="banner">
+    <h2 class="h2">This is the banner</h2>
+
+  </div>
+</div>
 <!-- Product listing -->
 
 
 
-  <div class="container mt-5 mb-4 px-5">
+  <div class="container mt-5 mb-4 px-3">
     <!-- Card Container -->
     <div id="card-container"></div>
 

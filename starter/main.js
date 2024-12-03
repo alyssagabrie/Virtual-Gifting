@@ -100,7 +100,8 @@ cardBody.appendChild(cardTitle);
         const selectButton = document.createElement("a");
         selectButton.className = "btn btn-primary";
         selectButton.textContent = "Select this Gift";
-        selectButton.href = `form.html?title=${encodeURIComponent(item.Title)}&brand=${encodeURIComponent(item.Brand)}&description=${encodeURIComponent(item.Description)}&colors=${encodeURIComponent(item.Colors)}&sizes=${encodeURIComponent(item.Sizes)}&images=${encodeURIComponent(item.Images)}`;
+        let sizesParam = item.Sizes ? `&sizes=${encodeURIComponent(item.Sizes)}` : "";
+        selectButton.href = `form.html?title=${encodeURIComponent(item.Title)}&brand=${encodeURIComponent(item.Brand)}&description=${encodeURIComponent(item.Description)}&colors=${encodeURIComponent(item.Colors)}${sizesParam}&images=${encodeURIComponent(item.Images)}`;
 
         buttonContainer.appendChild(selectButton);
 
@@ -225,8 +226,14 @@ function createQuickViewModal(item, index) {
  const confirmButton = document.createElement("a");
  confirmButton.className = "btn btn-primary mt-3"; // Add button styles
  confirmButton.textContent = "Confirm this gift";
- confirmButton.href = `form.html?title=${encodeURIComponent(item.Title)}&brand=${encodeURIComponent(item.Brand)}`;
- productDetails.appendChild(confirmButton); // Append to productDetails
+ let sizesParam = item.Sizes ? `&sizes=${encodeURIComponent(item.Sizes)}` : "";
+
+ confirmButton.href = `form.html?title=${encodeURIComponent(item.Title)}&brand=${encodeURIComponent(item.Brand)}&description=${encodeURIComponent(item.Description)}&colors=${encodeURIComponent(item.Colors)}${sizesParam}&images=${encodeURIComponent(item.Images)}`;
+ productDetails.appendChild(confirmButton);
+ 
+ // Append to productDetails
+
+
   // const sizes = document.createElement("h6");
   // sizes.textContent = "Available Sizes:";
   // productDetails.appendChild(sizes);
