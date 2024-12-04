@@ -23,11 +23,155 @@ async function fetchData() {
       .map(item => JSON.parse(item));
     console.log("Deduplicated Data:", uniqueData);
 
+    // Initial rendering
     createDynamicCards(uniqueData);
+
+    // Enable category filtering
+    setupCategoryFilters(uniqueData);
   } catch (error) {
     console.error("Error fetching data:", error);
   }
 }
+
+// Setup Category Filters (Buttons and Dropdown)
+function setupCategoryFilters(data) {
+  const filterButtons = document.querySelectorAll(".filter-btn");
+  const filterDropdown = document.getElementById("filterDropdown");
+
+  // Event listener for buttons
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const category = button.getAttribute("data-category");
+      filterProducts(category, data);
+    });
+  });
+
+  // Event listener for dropdown
+  filterDropdown.addEventListener("change", (e) => {
+    const category = e.target.value;
+    filterProducts(category, data);
+  });
+
+  // Filter products function
+  function filterProducts(category, data) {
+    const filteredData =
+      category === "all"
+        ? data
+        : data.filter((item) => item.Categories === category);
+
+    createDynamicCards(filteredData); // Re-render cards based on the selected category
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const searchBar = document.getElementById("searchBar");
+  const suggestions = document.getElementById("suggestions");
+  const categories = [
+    "Audio",
+    "Home Appliances",
+    "Kitchen Tech",
+    "Smart Glasses",
+    "Beauty",
+    "Smart Devices"    
+  ];
+
+  let currentIndex = -1; // Track the currently highlighted suggestion
+
+  // Handle input in the search bar
+  searchBar.addEventListener("input", (e) => {
+    const query = e.target.value.toLowerCase();
+    suggestions.innerHTML = ""; // Clear previous suggestions
+    currentIndex = -1; // Reset the highlighted index
+
+    if (query) {
+      const filteredCategories = categories.filter((category) =>
+        category.toLowerCase().includes(query)
+      );
+
+      if (filteredCategories.length > 0) {
+        suggestions.style.display = "block";
+        filteredCategories.forEach((category, index) => {
+          const suggestionItem = document.createElement("li");
+          suggestionItem.textContent = category;
+          suggestionItem.setAttribute("role", "option"); // Add ARIA role
+          suggestionItem.setAttribute("tabindex", "-1"); // Make items focusable
+          suggestionItem.classList.add("suggestion-item");
+          suggestionItem.addEventListener("click", () => {
+            selectSuggestion(category);
+          });
+          suggestions.appendChild(suggestionItem);
+        });
+      } else {
+        suggestions.style.display = "none";
+      }
+    } else {
+      suggestions.style.display = "none";
+    }
+  });
+
+  // Handle keyboard navigation
+  searchBar.addEventListener("keydown", (e) => {
+    const suggestionItems = document.querySelectorAll(".suggestion-item");
+
+    if (e.key === "ArrowDown") {
+      e.preventDefault(); // Prevent cursor movement
+      if (suggestionItems.length > 0) {
+        currentIndex = (currentIndex + 1) % suggestionItems.length;
+        updateHighlight(suggestionItems);
+      }
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault(); // Prevent cursor movement
+      if (suggestionItems.length > 0) {
+        currentIndex =
+          (currentIndex - 1 + suggestionItems.length) % suggestionItems.length;
+        updateHighlight(suggestionItems);
+      }
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      if (currentIndex >= 0 && suggestionItems[currentIndex]) {
+        const category = suggestionItems[currentIndex].textContent;
+        selectSuggestion(category);
+      }
+    } else if (e.key === "Escape") {
+      suggestions.style.display = "none"; // Close suggestions on Escape
+    }
+  });
+
+  // Select a suggestion
+  function selectSuggestion(category) {
+    searchBar.value = category; // Update the search bar with the selected category
+    suggestions.style.display = "none"; // Hide suggestions
+    filterProducts(category); // Trigger category filter
+  }
+
+  // Update highlighted suggestion
+  function updateHighlight(items) {
+    items.forEach((item, index) => {
+      if (index === currentIndex) {
+        item.classList.add("highlight");
+        item.scrollIntoView({ block: "nearest" }); // Ensure highlighted item is visible
+      } else {
+        item.classList.remove("highlight");
+      }
+    });
+  }
+
+  // Filter products (reuses existing functionality)
+  function filterProducts(category) {
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    filterButtons.forEach((button) => {
+      if (
+        button.getAttribute("data-category").toLowerCase() ===
+        category.toLowerCase()
+      ) {
+        button.click(); // Simulate button click for filtering
+      }
+    });
+  }
+});
+
+
+
 // Create cards dynamically
 function createDynamicCards(data) {
   const container = document.getElementById("card-container");
@@ -79,31 +223,26 @@ function createDynamicCards(data) {
     const cardBody = document.createElement("div");
     cardBody.className = "card-body";
 
-// Add Brand element
-const cardBrand = document.createElement("small");
-cardBrand.className = "card-brand text-muted d-block"; // Styling classes
-cardBrand.textContent = item.Brand || "No Brand Available";
-cardBody.appendChild(cardBrand);
+    const cardBrand = document.createElement("small");
+    cardBrand.className = "card-brand text-muted d-block";
+    cardBrand.textContent = item.Brand || "No Brand Available";
+    cardBody.appendChild(cardBrand);
 
-// Title remains below Brand
-const cardTitle = document.createElement("h5");
-cardTitle.className = "card-title";
-cardTitle.textContent = item.Title || "No Title Available";
-cardBody.appendChild(cardTitle);
-
+    const cardTitle = document.createElement("h5");
+    cardTitle.className = "card-title";
+    cardTitle.textContent = item.Title || "No Title Available";
+    cardBody.appendChild(cardTitle);
 
     const buttonContainer = document.createElement("div");
     buttonContainer.className = "button-container";
 
+    const selectButton = document.createElement("a");
+    selectButton.className = "btn btn-primary";
+    selectButton.textContent = "Select this Gift";
+    let sizesParam = item.Sizes ? `&sizes=${encodeURIComponent(item.Sizes)}` : "";
+    selectButton.href = `form.html?title=${encodeURIComponent(item.Title)}&brand=${encodeURIComponent(item.Brand)}&description=${encodeURIComponent(item.Description)}&colors=${encodeURIComponent(item.Colors)}${sizesParam}&images=${encodeURIComponent(item.Images)}`;
 
-        // "Select this Gift" Button
-        const selectButton = document.createElement("a");
-        selectButton.className = "btn btn-primary";
-        selectButton.textContent = "Select this Gift";
-        let sizesParam = item.Sizes ? `&sizes=${encodeURIComponent(item.Sizes)}` : "";
-        selectButton.href = `form.html?title=${encodeURIComponent(item.Title)}&brand=${encodeURIComponent(item.Brand)}&description=${encodeURIComponent(item.Description)}&colors=${encodeURIComponent(item.Colors)}${sizesParam}&images=${encodeURIComponent(item.Images)}`;
-
-        buttonContainer.appendChild(selectButton);
+    buttonContainer.appendChild(selectButton);
 
     const quickViewButton = document.createElement("button");
     quickViewButton.className = "btn btn-secondary";
@@ -121,7 +260,6 @@ cardBody.appendChild(cardTitle);
   });
 }
 
-// Create modals dynamically
 function createQuickViewModal(item, index) {
   const modalContainer = document.getElementById("modal-container");
 
@@ -140,7 +278,6 @@ function createQuickViewModal(item, index) {
 
   const modalDialog = document.createElement("div");
   modalDialog.className = "modal-dialog custom-modal"; // Add custom class
-  
 
   const modalContent = document.createElement("div");
   modalContent.className = "modal-content";
@@ -170,8 +307,8 @@ function createQuickViewModal(item, index) {
   // Modal Image Slider
   const modalImageSlider = document.createElement("div");
   modalImageSlider.className = "modal-image-slider w-100 w-md-50 position-relative";
-  
-  const images = item.Images?.split(",").map(url => url.trim()) || [];
+
+  const images = item.Images?.split(",").map((url) => url.trim()) || [];
   images.forEach((imageURL, imgIndex) => {
     const img = document.createElement("img");
     img.src = imageURL;
@@ -182,7 +319,6 @@ function createQuickViewModal(item, index) {
     img.style.objectFit = "cover"; // Maintain aspect ratio
     modalImageSlider.appendChild(img);
   });
-  
 
   // Add navigation buttons to the modal slider
   const prevArrow = document.createElement("button");
@@ -205,7 +341,6 @@ function createQuickViewModal(item, index) {
   brand.innerHTML = `Brand: <span>${item.Brand || "No Brand Available"}</span>`;
   productDetails.appendChild(brand);
 
-
   const description = document.createElement("h6");
   description.textContent = "Description:";
   productDetails.appendChild(description);
@@ -222,25 +357,12 @@ function createQuickViewModal(item, index) {
   colorsText.textContent = item.Colors;
   productDetails.appendChild(colorsText);
 
- // Add "Confirm this gift" button right after description and colors
- const confirmButton = document.createElement("a");
- confirmButton.className = "btn btn-primary mt-3"; // Add button styles
- confirmButton.textContent = "Confirm this gift";
- let sizesParam = item.Sizes ? `&sizes=${encodeURIComponent(item.Sizes)}` : "";
-
- confirmButton.href = `form.html?title=${encodeURIComponent(item.Title)}&brand=${encodeURIComponent(item.Brand)}&description=${encodeURIComponent(item.Description)}&colors=${encodeURIComponent(item.Colors)}${sizesParam}&images=${encodeURIComponent(item.Images)}`;
- productDetails.appendChild(confirmButton);
- 
- // Append to productDetails
-
-
-  // const sizes = document.createElement("h6");
-  // sizes.textContent = "Available Sizes:";
-  // productDetails.appendChild(sizes);
-
-  // const sizesText = document.createElement("p");
-  // sizesText.textContent = item.Sizes;
-  // productDetails.appendChild(sizesText);
+  const confirmButton = document.createElement("a");
+  confirmButton.className = "btn btn-primary mt-3";
+  confirmButton.textContent = "Confirm this gift";
+  let sizesParam = item.Sizes ? `&sizes=${encodeURIComponent(item.Sizes)}` : "";
+  confirmButton.href = `form.html?title=${encodeURIComponent(item.Title)}&brand=${encodeURIComponent(item.Brand)}&description=${encodeURIComponent(item.Description)}&colors=${encodeURIComponent(item.Colors)}${sizesParam}&images=${encodeURIComponent(item.Images)}`;
+  productDetails.appendChild(confirmButton);
 
   // Combine modal elements
   modalBody.appendChild(modalImageSlider);
@@ -253,30 +375,37 @@ function createQuickViewModal(item, index) {
 
   modalContainer.appendChild(modal);
 }
+
+
+
+
 // Slider Navigation Functions
 function showPreviousImage(button) {
   const slider = button.closest(".modal-image-slider") || button.closest(".image-slider");
   const images = slider.querySelectorAll(".slider-image");
-  const currentIndex = Array.from(images).findIndex(img =>
-    img.classList.contains("active")
-  );
+  const currentIndex = Array.from(images).findIndex(img => img.classList.contains("active"));
+
+  // Ensure the current active image is found
+  if (currentIndex === -1) return;
 
   images[currentIndex].classList.remove("active");
-  const newIndex = (currentIndex - 1 + images.length) % images.length;
+  const newIndex = (currentIndex - 1 + images.length) % images.length; // Wrap around to the last image
   images[newIndex].classList.add("active");
 }
 
 function showNextImage(button) {
   const slider = button.closest(".modal-image-slider") || button.closest(".image-slider");
   const images = slider.querySelectorAll(".slider-image");
-  const currentIndex = Array.from(images).findIndex(img =>
-    img.classList.contains("active")
-  );
+  const currentIndex = Array.from(images).findIndex(img => img.classList.contains("active"));
+
+  // Ensure the current active image is found
+  if (currentIndex === -1) return;
 
   images[currentIndex].classList.remove("active");
-  const newIndex = (currentIndex + 1) % images.length;
+  const newIndex = (currentIndex + 1) % images.length; // Wrap around to the first image
   images[newIndex].classList.add("active");
 }
+
 
 // Fetch data on load
 fetchData();

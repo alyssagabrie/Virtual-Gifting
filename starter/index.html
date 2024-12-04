@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bootstrap demo</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -88,11 +88,53 @@
       </div>
   </div> 
 
-  <div class="banner">
-    <h2 class="h2">This is the banner</h2>
 
-  </div>
 </div>
+<div class="banner">
+  <h2 class="h2">This is the banner</h2>
+
+</div>
+
+<div id="filterContainer" style="text-align: center;">
+  <!-- Search Bar -->
+  <div id="searchBarContainer" style="margin-bottom: 20px;">
+    <input
+      type="text"
+      id="searchBar"
+      placeholder="Search items..."
+      aria-label="Search items"
+      autocomplete="off"
+      style="padding: 10px; font-size: 16px; width: 100%; max-width: 400px; border: 1px solid #ddd; border-radius: 5px;"
+    />
+    <ul id="suggestions" style="display: none; position: absolute; background: white; border: 1px solid #ddd; list-style: none; margin: 0; padding: 0; width: 100%; max-width: 400px; z-index: 1000;"></ul>
+  </div>
+
+  <!-- Buttons (visible on larger screens) -->
+  <div id="filterButtons" style="margin-bottom: 20px;">
+    <button class="filter-btn" data-category="all">All</button>
+    <button class="filter-btn" data-category="Audio">Audio</button>
+    <button class="filter-btn" data-category="Home Appliances">Home Appliances</button>
+    <button class="filter-btn" data-category="Kitchen Tech">Kitchen Tech</button>
+    <button class="filter-btn" data-category="Smart Glasses">Smart Glasses</button>
+    <button class="filter-btn" data-category="Beauty">Beauty</button>
+    <button class="filter-btn" data-category="Smart Devices">Smart Devices</button>
+    
+  </div>
+
+  <!-- Dropdown (hidden by default) -->
+  <select id="filterDropdown">
+    <option value="all">All</option>
+    <option value="Audio">Audio</option>
+    <option value="Home Appliances">Home Appliances</option>
+    <option value="Kitchen Tech">Kitchen Tech</option>
+    <option value="Smart Glasses">Smart Glasses</option>
+    <option value="Beauty">Beauty</option>
+    <option value="Smart Devices">Smart Devices</option>
+  </select>
+</div>
+
+
+
 <!-- Product listing -->
 
 

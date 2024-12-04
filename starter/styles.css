@@ -45,6 +45,141 @@
   color: white; /* Optional: ensure text is readable */
 }
 
+
+/* Center the filter container and its elements */
+#filterContainer {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically (if applicable) */
+  padding: 20px 0; /* Add vertical padding */
+}
+
+/* Position the search bar container relative */
+#searchBarContainer {
+  position: relative; /* Ensure suggestions are positioned relative to this container */
+  width: 100%;
+  max-width: 400px; /* Match the width of the search bar */
+}
+/* Search Bar Styling */
+#searchBar {
+  margin-bottom: 0; /* No additional margin for alignment */
+  padding: 10px;
+  font-size: 16px;
+  width: 100%;
+  max-width: 400px; /* Control the width of the search bar */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* Suggestions Dropdown */
+#suggestions {
+  display: none; /* Hidden by default */
+  position: absolute; /* Position relative to the search bar container */
+  top: 100%; /* Place directly below the search bar */
+  left: 0;
+  right: 0; /* Ensure full-width alignment */
+  background: white;
+  border: 1px solid #ddd;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%; /* Match the width of the search bar */
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+}
+
+#suggestions li {
+  padding: 10px;
+  cursor: pointer;
+  text-align: left; /* Align text to the left within each suggestion */
+}
+
+#suggestions li:hover {
+  background: #f0f0f0;
+}
+
+
+#suggestions li.highlight {
+  background: #007BFF; /* Highlight background */
+  color: white; /* Highlight text color */
+}
+
+/* Filter Buttons Styling */
+#filterButtons {
+  display: flex;
+  justify-content: center; /* Center the buttons */
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  gap: 10px; /* Add space between buttons */
+  margin-bottom: 20px; /* Add spacing below the buttons */
+}
+
+.filter-btn {
+  padding: 10px 15px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  flex: 0 1 auto;
+}
+
+.filter-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Dropdown Styling */
+#filterDropdown {
+  display: none;
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  font-size: 16px;
+  margin: 0 auto 20px auto; /* Center the dropdown with spacing below */
+}
+
+
+/* Buttons and Dropdown Styling */
+#filterButtons,
+#filterDropdown {
+  margin-top: 20px; /* Add space below the search bar and suggestions */
+}
+/* Mobile View: Show dropdown, hide buttons */
+@media (max-width: 768px) {
+  #filterButtons {
+    display: none; /* Hide buttons */
+  }
+
+  #filterDropdown {
+    display: block; /* Show dropdown */
+  }
+}
+
+
+
+/* Product List Styling */
+
+#productList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.product-item {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.product-item img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+
 /* General modal styling */
 .modal-dialog {
   max-width: 80%;
@@ -93,7 +228,7 @@
 /* Image Slider Styling */
 .modal-image-slider {
   flex: 1;
-  max-width: 50%;
+  width: 50%;
   position: relative;
   overflow: hidden;
   border: 1px solid #ddd;
@@ -109,6 +244,7 @@
 .slider-image {
   display: none; /* Hide inactive images */
   width: 100%;
+  height: auto;
   object-fit: cover;
 }
 

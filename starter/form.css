@@ -228,3 +228,33 @@
     margin: 5px 0; /* Reduce spacing between paragraphs */
   }
 
+/* Go Back Section Styled as Sticky Header */
+.go-back-section {
+  position: sticky; /* Make the section sticky */
+  top: 0; /* Stick to the top of the viewport */
+  background-color: #f8f9fa; /* Light gray background */
+  padding: 20px; /* Add padding for a header-like feel */
+  font-size: 24px; /* Larger font size for prominence */
+  font-weight: bold; /* Bold text */
+  color: #333; /* Dark gray text color */
+  border-bottom: 2px solid #ddd; /* Optional: Add a subtle bottom border */
+  z-index: 1000; /* Ensure it stays above other elements */
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Vertically align items */
+}
+
+/* Button Styling (Left-Aligned) */
+.go-back-button {
+  padding: 10px 25px;
+  background-color: #007BFF; /* Blue background for the button */
+  color: white; /* White text */
+  font-size: 16px; /* Standard font size */
+  text-decoration: none; /* Remove underline */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s ease;
+  margin: 0; /* Ensure no extra margin affects alignment */
+}
+
+.go-back-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
