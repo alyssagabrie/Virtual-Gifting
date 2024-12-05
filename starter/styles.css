@@ -586,10 +586,25 @@ a.btn-secondary:hover {
   text-align: center;
 }
 
-/* Slider Thumbnails */
+/* Default Layout (Desktop and Large Screens) */
+.modal-body {
+  display: flex;
+  flex-direction: row; /* Horizontal layout for larger screens */
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.modal-image-slider {
+  flex: 1;
+  max-width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
 .slider-thumbnails {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 10px;
 }
 
@@ -607,4 +622,86 @@ a.btn-secondary:hover {
 
 .thumbnail-image.active-thumbnail {
   border-color: #007BFF;
+}
+
+
+/* Tablet View (768px and below) */
+@media screen and (max-width: 768px) {
+  .modal-body {
+    flex-direction: column; /* Stack content */
+    align-items: center; /* Center content horizontally */
+    gap: 15px;
+  }
+
+  .modal-image-slider {
+    max-width: 100%; /* Allow full width of the modal */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 10px; /* Add space below the main image */
+  }
+
+  .slider-thumbnails {
+    display: flex; /* Horizontal layout for thumbnails */
+    flex-direction: row; /* Ensure thumbnails align horizontally */
+    gap: 8px; /* Space between thumbnails */
+    justify-content: center; /* Center thumbnails */
+    margin-top: 10px; /* Space below the main image */
+  }
+
+  .thumbnail-image {
+    width: 50px; /* Thumbnail size for tablet */
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 2px solid transparent; /* Default border */
+  }
+
+  .thumbnail-image.active-thumbnail {
+    border-color: #007BFF; /* Highlight active thumbnail */
+  }
+
+  .modal-details {
+    text-align: center;
+    margin-top: 15px; /* Space below thumbnails */
+  }
+}
+
+/* Mobile View (480px and below) */
+@media screen and (max-width: 480px) {
+  .modal-body {
+    flex-direction: column; /* Fully stack content */
+    align-items: center; /* Center align content */
+    gap: 20px;
+  }
+
+  .modal-image-slider {
+    max-width: 100%; /* Full width for main image */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 15px; /* Add space below the main image */
+  }
+
+  .slider-thumbnails {
+    display: flex; /* Horizontal layout */
+    flex-direction: row; /* Align thumbnails horizontally */
+    flex-wrap: wrap; /* Allow wrapping if needed */
+    justify-content: center; /* Center thumbnails */
+    gap: 10px; /* Space between thumbnails */
+    margin-top: 10px; /* Space below the main image */
+  }
+
+  .thumbnail-image {
+    width: 60px; /* Larger thumbnail size for mobile */
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 2px solid transparent; /* Default border */
+  }
+
+  .thumbnail-image.active-thumbnail {
+    border-color: #007BFF; /* Highlight active thumbnail */
+  }
+
+  .modal-details {
+    text-align: center;
+    margin-top: 20px; /* Space below thumbnails */
+  }
 }

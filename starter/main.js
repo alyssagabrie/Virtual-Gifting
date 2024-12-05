@@ -328,5 +328,38 @@ function updateMainImage(modalIndex, colorIndex) {
   });
 }
 
+
+// Mobile View Adjustment on Modal
+function rearrangeThumbnailsForMobile(modal) {
+  const isMobile = window.innerWidth <= 480; // Mobile view threshold
+  const modalBody = modal.querySelector(".modal-body");
+  const thumbnails = modal.querySelector(".slider-thumbnails");
+  const imageSlider = modal.querySelector(".modal-image-slider");
+
+  if (isMobile) {
+    // Move thumbnails below the main image
+    modalBody.appendChild(thumbnails);
+    thumbnails.style.flexDirection = "row"; // Force horizontal layout
+    thumbnails.style.justifyContent = "center";
+    thumbnails.style.marginTop = "10px";
+    thumbnails.style.gap = "10px"; // Space between thumbnails
+  } else {
+    // Restore default layout for larger screens
+    modalBody.insertBefore(thumbnails, imageSlider.nextSibling); // Place thumbnails after the image
+    thumbnails.style.flexDirection = "column"; // Restore vertical layout
+    thumbnails.style.marginTop = "0";
+    thumbnails.style.gap = "8px"; // Reset gap for larger screens
+  }
+}
+
+// Trigger rearrangement on resize
+window.addEventListener("resize", () => {
+  const modals = document.querySelectorAll(".modal");
+  modals.forEach((modal) => rearrangeThumbnailsForMobile(modal));
+});
+
+
 // Fetch Data on Page Load
 fetchData();
+
+

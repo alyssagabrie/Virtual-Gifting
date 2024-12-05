@@ -1,4 +1,62 @@
-// // Parse Query Parameters
+
+
+
+// Parse Query Parameters
+
+const urlParams = new URLSearchParams(window.location.search);
+
+// Extract product data from URL parameters
+const productTitle = urlParams.get("title") || "N/A";
+
+// Create content dynamically
+const productPageContent = document.createElement("div");
+productPageContent.className = "product-page-container";
+productPageContent.innerHTML = `
+
+
+  <!-- Center Section: Embedded Form -->
+  <div class="product-form">
+    <div class="form-embed-container" id="dynamicFormContainer"></div>
+  </div>
+`;
+
+// Append dynamically created content to the existing body
+document.body.appendChild(productPageContent);
+
+// Embed 123Forms Dynamically
+function embedDynamicForm() {
+  const formContainer = document.getElementById("dynamicFormContainer");
+
+  if (!formContainer) {
+    console.error("Form container not found!");
+    return;
+  }
+
+  // Create a script element for 123Forms
+  const formScript = document.createElement("script");
+  formScript.type = "text/javascript";
+  formScript.defer = true;
+  formScript.src = "https://form.123formbuilder.com/embed/6774944.js";
+
+  // Add dynamic variables for 123Forms
+  formScript.setAttribute(
+    "data-custom-vars",
+    `115926509=${encodeURIComponent(productTitle)}`
+  );
+
+  // Add default width and role attributes
+  formScript.setAttribute("data-default-width", "800px");
+  formScript.setAttribute("data-role", "form");
+
+  // Append the script to the form container
+  formContainer.appendChild(formScript);
+}
+
+// Embed the form after the page loads
+embedDynamicForm();
+
+
+
 
 // This adds the product info on the left and form on the right
 // const urlParams = new URLSearchParams(window.location.search);
@@ -108,58 +166,3 @@
 
 // // Initialize the slideshow
 // showSlide(currentSlideIndex);
-
-
-// Parse Query Parameters
-
-const urlParams = new URLSearchParams(window.location.search);
-
-// Extract product data from URL parameters
-const productTitle = urlParams.get("title") || "N/A";
-
-// Create content dynamically
-const productPageContent = document.createElement("div");
-productPageContent.className = "product-page-container";
-productPageContent.innerHTML = `
-
-
-  <!-- Center Section: Embedded Form -->
-  <div class="product-form">
-    <div class="form-embed-container" id="dynamicFormContainer"></div>
-  </div>
-`;
-
-// Append dynamically created content to the existing body
-document.body.appendChild(productPageContent);
-
-// Embed 123Forms Dynamically
-function embedDynamicForm() {
-  const formContainer = document.getElementById("dynamicFormContainer");
-
-  if (!formContainer) {
-    console.error("Form container not found!");
-    return;
-  }
-
-  // Create a script element for 123Forms
-  const formScript = document.createElement("script");
-  formScript.type = "text/javascript";
-  formScript.defer = true;
-  formScript.src = "https://form.123formbuilder.com/embed/6774944.js";
-
-  // Add dynamic variables for 123Forms
-  formScript.setAttribute(
-    "data-custom-vars",
-    `115926509=${encodeURIComponent(productTitle)}`
-  );
-
-  // Add default width and role attributes
-  formScript.setAttribute("data-default-width", "800px");
-  formScript.setAttribute("data-role", "form");
-
-  // Append the script to the form container
-  formContainer.appendChild(formScript);
-}
-
-// Embed the form after the page loads
-embedDynamicForm();
