@@ -62,12 +62,12 @@ function embedDynamicForm() {
   const formScript = document.createElement("script");
   formScript.type = "text/javascript";
   formScript.defer = true;
-  formScript.src = "https://form.123formbuilder.com/embed/6773482.js";
+  formScript.src = "https://form.123formbuilder.com/embed/6774944.js";
 
   // Add dynamic variables for 123Forms
   formScript.setAttribute(
     "data-custom-vars",
-    `115911333=${encodeURIComponent(productTitle)}`
+    `115926509=${encodeURIComponent(productTitle)}`
   );
 
   // Add default width and role attributes
