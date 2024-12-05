@@ -358,6 +358,17 @@ window.addEventListener("resize", () => {
   modals.forEach((modal) => rearrangeThumbnailsForMobile(modal));
 });
 
+function scrollToSection(selector) {
+  const targetElement = document.querySelector(selector);
+  if (targetElement) {
+    targetElement.scrollIntoView({
+      behavior: "smooth", // Enables smooth scrolling
+      block: "start"      // Scrolls to the top of the target element
+    });
+  } else {
+    console.error(`Element not found for selector: ${selector}`);
+  }
+}
 
 // Fetch Data on Page Load
 fetchData();
