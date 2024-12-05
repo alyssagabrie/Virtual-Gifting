@@ -40,6 +40,62 @@
 }
 
 
+.hero-section {
+  background-image: url('Images/giftbackground.png');
+  background-size: cover; /* Makes the image cover the entire section */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Ensures no tiling */
+  height: 100vh; /* Sets the height of the hero section */
+  display: flex; /* Enables flexbox for centering content */
+  justify-content: center; /* Centers content horizontally */
+  align-items: center; /* Centers content vertically */
+  color: white; /* Ensures text is visible on the image */
+  text-align: center; /* Centers the text */
+}
+
+  .hero-text h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      color:#31365E
+  }
+  .hero-text p {
+      font-size: 1.25rem;
+      margin: 15px 0;
+      color: #31365E;
+  }
+  .start-shopping-btn {
+      margin-top: 20px;
+      padding: 15px 30px;
+      font-size: 1.25rem;
+      background-color: #00B2C0;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      text-transform: uppercase;
+      transition: transform 0.3s, background-color 0.3s;
+  }
+  .start-shopping-btn:hover {
+      background-color: #31365E;
+      color: #ffffff;
+      transform: scale(1.1);
+  }
+
+  .banner {
+  background-color: #00B2C0; /* Light gray background */
+  padding: 20px; /* Internal spacing */
+  text-align: center; /* Centers content */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds subtle shadow */
+  width: 100%; /* Makes the banner stretch the entire width */
+  margin: 0; /* Removes default margin */
+  position: relative; /* Ensures it stays within the flow of the document */
+}
+
+.h2{
+  color:#ffff;
+}
+
+
+
 .custom-bg {
   background-color: #00B2C0;
   color: white; /* Optional: ensure text is readable */
@@ -116,7 +172,7 @@
 
 .filter-btn {
   padding: 10px 15px;
-  background-color: #007BFF;
+  background-color: #FAA951;
   color: white;
   border: none;
   border-radius: 5px;
@@ -125,7 +181,7 @@
 }
 
 .filter-btn:hover {
-  background-color: #0056b3;
+  background-color: #00B2C0;
 }
 
 /* Dropdown Styling */
@@ -393,21 +449,22 @@ a.btn {
 }
 
 a.btn-primary {
-  background-color: #007bff;
+  background-color: #00B2C0;
+  border:none;
   color: #fff;
 }
 
 a.btn-primary:hover {
-  background-color: #0056b3;
+  background-color: #FAA951;
 }
 
 a.btn-secondary {
-  background-color: #6c757d;
+  background-color: #FAA951;
   color: #fff;
 }
 
 a.btn-secondary:hover {
-  background-color: #5a6268;
+  background-color: #00B2C0;
 }
 
 @media (max-width: 576px) {
@@ -463,7 +520,7 @@ a.btn-secondary:hover {
   display: inline-block;
   padding: 10px 20px;
   margin-top: 10px;
-  background-color: #007BFF; /* Blue button */
+  background-color: #00B2C0; /* Blue button */
   color: #fff; /* White text */
   font-size: 16px;
   font-weight: bold;
@@ -473,5 +530,5 @@ a.btn-secondary:hover {
 }
 
 .email-button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #00B2C0; /* Darker blue on hover */
 }
