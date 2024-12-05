@@ -41,16 +41,7 @@ productPageContent.innerHTML = `
   </div>
 
   <!-- Right Section: Embedded Form -->
-  <div class="product-form">
-    <div class="form-embed-container">
-      <script type="text/javascript" defer
-        src="https://form.123formbuilder.com/embed/6773482.js"
-        data-role="form"
-        data-default-width="800px"
-        data-custom-vars="115911333=${encodeURIComponent(productTitle)}&115911392=${encodeURIComponent(colors.join(", "))}">
-      </script>
-    </div>
-  </div>
+<!-- form.123formbuilder.com script begins here --> <style> .form-embed-container { overflow: hidden; /* Prevents double scrollbars */ } </style> <div class="form-embed-container"> <script type="text/javascript" defer src="https://form.123formbuilder.com/embed/6771990.js" data-role="form" data-default-width="800px" data-custom-vars="115838765=Live%20Free%20TWS%20NC%20Earbuds"> </script> </div> <!-- form.123formbuilder.com script ends here -->
 `;
 
 // Append dynamically created content to the existing body
