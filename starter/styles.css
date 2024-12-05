@@ -532,3 +532,79 @@ a.btn-secondary:hover {
 .email-button:hover {
   background-color: #00B2C0; /* Darker blue on hover */
 }
+
+
+.color-selection-container {
+  display: flex;
+  gap: 10px;
+}
+
+.color-option {
+  text-align: center;
+  cursor: pointer;
+}
+
+.color-option img {
+  width: 50px;
+  height: 50px;
+  border: 2px solid transparent;
+  border-radius: 4px;
+}
+
+.color-option.active img {
+  border-color: #007BFF;
+}
+
+/* Modal Image Arrows */
+.modal-image-slider .prev-arrow,
+.modal-image-slider .next-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  z-index: 1;
+}
+
+.modal-image-slider .prev-arrow {
+  left: 0;
+}
+
+.modal-image-slider .next-arrow {
+  right: 0;
+}
+
+/* Active Color Thumbnail */
+.color-option.active .color-thumbnail {
+  border: 2px solid #007BFF;
+}
+
+.color-option {
+  text-align: center;
+}
+
+/* Slider Thumbnails */
+.slider-thumbnails {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.thumbnail-option {
+  cursor: pointer;
+}
+
+.thumbnail-image {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 2px solid transparent;
+}
+
+.thumbnail-image.active-thumbnail {
+  border-color: #007BFF;
+}
