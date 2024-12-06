@@ -88,10 +88,11 @@
   width: 100%; /* Makes the banner stretch the entire width */
   margin: 0; /* Removes default margin */
   position: relative; /* Ensures it stays within the flow of the document */
+  color:#ffffff;
 }
 
 .h2{
-  color:#ffff;
+  color:#ffffff;
 }
 
 
